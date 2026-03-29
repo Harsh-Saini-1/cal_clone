@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
 import { getEvents, getSlots, createBooking } from '@/lib/api';
@@ -25,7 +25,7 @@ function detectTimezone() {
 
 type Stage = 'events' | 'calendar' | 'slots' | 'form' | 'done';
 
-export default function PublicBookingPage() {
+function BookingContent() {
   const searchParams = useSearchParams();
   const preselectedSlug = searchParams.get('event');
 
@@ -439,5 +439,17 @@ export default function PublicBookingPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function PublicBookingPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="spinner" />
+      </div>
+    }>
+      <BookingContent />
+    </Suspense>
   );
 }
