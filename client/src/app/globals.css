@@ -627,6 +627,7 @@ html, body {
   /* Show mobile actions row below info */
   .event-card-actions--mobile {
     display: flex;
+    flex-wrap: wrap;
     padding: 0 16px 16px;
     border-top: 1px solid var(--border-subtle);
     padding-top: 12px;
