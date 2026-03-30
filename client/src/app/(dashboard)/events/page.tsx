@@ -95,21 +95,27 @@ export default function EventsPage() {
               {/* Actions – shown below info on mobile */}
               <div className="event-card-actions event-card-actions--mobile">
                 <Link href={`/events/${e.id}/availability`} className="btn-secondary"
-                  style={{ textDecoration: 'none', fontSize: 13, padding: '6px 12px', flex: 1, justifyContent: 'center' }}>
-                  <Calendar size={13} /> Availability
+                  style={{ textDecoration: 'none', fontSize: 13, padding: '8px 12px', flex: '0 0 100%', justifyContent: 'center' }}>
+                  <Calendar size={14} /> Availability
                 </Link>
-                <Link href={`/events/${e.id}/overrides`} className="btn-secondary"
-                  style={{ textDecoration: 'none', fontSize: 13, padding: '6px 12px', flex: 1, justifyContent: 'center' }}>
-                  <CalendarX2 size={13} /> Overrides
-                </Link>
-                <Link href={`/events/${e.id}/edit`} className="btn-secondary"
-                  style={{ textDecoration: 'none', fontSize: 13, padding: '6px 12px', flex: 1, justifyContent: 'center' }}>
-                  <Pencil size={13} /> Edit
-                </Link>
-                <button className="btn-danger" style={{ fontSize: 13, padding: '6px 12px' }}
+               <div style={{ display: 'flex', gap: 8, width: '100%' }}>
+                  <Link href={`/events/${e.id}/overrides`} className="btn-secondary"
+                    style={{ textDecoration: 'none', fontSize: 13, padding: '8px 12px', flex: 2, justifyContent: 'center', minWidth: 0 }}>
+                    <CalendarX2 size={14} /> <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Overrides</span>
+                  </Link>
+                  <Link href={`/events/${e.id}/edit`} className="btn-secondary"
+                    style={{ textDecoration: 'none', fontSize: 13, padding: '8px 12px', flex: 1.5, justifyContent: 'center', minWidth: 0 }}>
+                    <Pencil size={14} /> Edit
+                  </Link>
+                  <button className="btn-danger" style={{ fontSize: 13, padding: '8px 12px', flex: 1, justifyContent: 'center' }}
+                    onClick={() => { if (window.confirm('Delete this event? All bookings will also be removed.')) remove.mutate(e.id); }}>
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+                {/* <button className="btn-danger" style={{ fontSize: 13, padding: '6px 12px' }}
                   onClick={() => { if (window.confirm('Delete this event? All bookings will also be removed.')) remove.mutate(e.id); }}>
                   <Trash2 size={13} />
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
